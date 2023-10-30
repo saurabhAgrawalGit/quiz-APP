@@ -1,5 +1,6 @@
 package com.example.quiz;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     Button next, previous;
+    ImageButton imageButton;
     ArrayList<QuesModel> arrayList= new ArrayList<>();
 
     RadioGroup radioGroup;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
       //  databaseReference = database.getReference("passwordTable").child("ques1");
         QuesModel quesModel=new QuesModel("how many "," new ","old ","just","check",2);
        // databaseReference.push().setValue(quesModel);
+        imageButton =findViewById(R.id.imageView);
 
         i=0;
 
@@ -136,7 +140,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                Toast.makeText(MainActivity.this, "radio group"+checkedId+" "+a.getId(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(MainActivity.this, "radio group"+checkedId+" "+a.getId(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int s= radioGroup.getCheckedRadioButtonId();
+                RadioButton just  =findViewById(s);
+                  String name = just.getText().toString();
+
+                if(s==-1)
+                {
+                    Toast.makeText(MainActivity.this,"you not select any option ", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(just.getText().toString()==name)
+                {
+                   Toast.makeText(MainActivity.this,"your answer is correct", Toast.LENGTH_SHORT).show();
+                    imageButton.setImageResource(R.drawable.right);
+                }
+                else
+                {
+                   Toast.makeText(MainActivity.this,"your answer is wrong ", Toast.LENGTH_SHORT).show();
+                    imageButton.setImageResource(R.drawable.ic_baseline_do_not_disturb_alt_24);
+                }
+               // Toast.makeText(MainActivity.this,String.valueOf(s), Toast.LENGTH_SHORT).show();
+                //arrayList.get(i).getQues();
 
             }
         });
