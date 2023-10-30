@@ -132,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                Toast.makeText(MainActivity.this, "radio group"+checkedId+" "+a.getId(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 
